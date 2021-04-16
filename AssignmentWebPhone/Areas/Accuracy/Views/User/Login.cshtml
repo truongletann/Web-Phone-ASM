@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+@model AssignmentWebPhone.Areas.Accuracy.Data.LoginModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="~/assets/accuracy/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="~/assets/accuracy/css/style.css">
+</head>
+
+<body>
+
+    <div class="wrapper" style="background-image: url('/assets/accuracy/images/bg-registration-form-1.jpg');">
+        <div class="inner">
+            <div class="image-holder">
+                <img src="~/assets/accuracy/images/registration-form-1.jpg" alt="">
+            </div>
+            @using (Html.BeginForm("Login", "User", FormMethod.Post))
+            {
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" });
+                <h3>Login Form</h3>
+                <div class="form-wrapper">
+                    @Html.TextBoxFor(model => model.UserID, new { @class = "form-control", @autofocus = "autofocus" })
+                    <i class="zmdi zmdi-account"></i>
+                </div>
+                <div class="form-wrapper">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", @autofocus = "autofocus" })
+                    <i class="zmdi zmdi-lock"></i>
+                </div>
+                <button type="submit">
+                    Login
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+                <a href="@Url.Action("Register", "User")">
+                  Register
+                </a>
+            }
+        </div>
+    </div>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

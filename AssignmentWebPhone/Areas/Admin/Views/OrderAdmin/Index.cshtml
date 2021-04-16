@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Model.EF.tblOrder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="main-body">
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb-title">
+                        <li class="breadcrumb-item">
+                            <a href="">
+                                <i class="feather icon-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="">
+                                Order
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-12">
+            <div class="card px-3">
+                <div class="card-header px-0 pb-2">
+                    <h2 class="text-uppercase text-center">LIST ORDER</h2>
+                    
+                </div>
+                <div class="card-block table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.tblUser.name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.total)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.dateBuy)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.address)
+                                    </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int i = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+
+                                <tr>
+                                    <th>@(i++)</th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tblUser.name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.total)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dateBuy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.address)
+                                    </td>
+                                   
+                                </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

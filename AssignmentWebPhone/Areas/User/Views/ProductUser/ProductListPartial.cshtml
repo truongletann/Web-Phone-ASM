@@ -1,0 +1,30 @@
+﻿@using Model.EF;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<tblProduct>
+
+
+
+@{ foreach (var item in Model)
+    {
+
+<div class="card col-3" style="width: 18rem;margin-top: 10px;">
+    <img style="height: 280px;" src="@item.imagePath" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title"> @Html.ActionLink(@item.name, "Details", "ProductUser", new { id = item.phoneID }, null)</h5>
+        <p class="card-text">n the card title and make up the bulk of the card's content.</p>
+        <p class="card-text">Des:   <span>@item.Description</span></p>
+        <h4 class="card-title">@(String.Format("{0:N0}", item.price))$</h4>
+        <div style="display: flex;">
+            @Html.ActionLink("Add to Cart", "OrderNow", "ShoppingCart", new { id = item.phoneID }, null)
+        </div>
+    </div>
+</div> } }
+<div class="clear"></div>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<br>
+<div class="div-pagination" style="text-align:center">
+    @Html.PagedListPager(Model,
+         page => Url.Action("Index",new { page = page, category = ViewBag.category, search=ViewBag.search })
+        )
+</div>

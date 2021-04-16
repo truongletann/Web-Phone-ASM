@@ -1,0 +1,60 @@
+﻿@model Model.EF.tblOrder
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/User/Views/Shared/_LayoutUser.cshtml";
+}
+
+<a class="continue_shopping" href="@Url.Action("Index","Order")">
+    <i id="cart_back" class="bx
+    bx-left-arrow-alt icon-single"></i> <span class="text_continous">History order</span>
+</a>
+<!-- End Button bạck -->
+
+<div class="container">
+    <h1 class="jumbotron-heading banner"> ORDER DETAIL</h1>
+</div>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">product Name</th>
+                            <th scope="col" class="text-center">price</th>
+                            <th scope="col" class="text-center">quantity</th>
+                            <th scope="col" class="text-center">Total</th>
+                            <th> </th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.tblOrderDetails)
+                        {
+                            <tr style="text-align: center">
+                                <td><h6>@item.tblProduct.name</h6></td>
+                                <td style="padding-top: 13px">
+                                    <h6>$@(String.Format("{0:N0}", item.price))</h6>
+                                </td>
+                                <td style="padding-top: 13px">
+                                    <h6>@item.quantity</h6>
+                                </td>
+                                <td><h6>$@(String.Format("{0:N0}", item.price*item.quantity))</h6></td>
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                    <h6 style="float: right; font-size: 40px; color: red">Total:$@Model.total</h6>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

@@ -1,0 +1,65 @@
+﻿@using Model.EF;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<tblOrder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/User/Views/Shared/_LayoutUser.cshtml";
+}
+
+<a class="continue_shopping" href="@Url.Action("Index","ProductUser")">
+    <i id="cart_back" class="bx
+    bx-left-arrow-alt icon-single"></i> <span class="text_continous">Continue shopping</span>
+</a>
+<!-- End Button bạck -->
+
+<div class="container">
+    <h1 class="jumbotron-heading banner"> ORDER HISTORY</h1>
+</div>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">ID</th>
+                            <th scope="col" class="text-center">total</th>
+                            <th scope="col" class="text-center">order date</th>
+                            <th scope="col" class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr style="text-align: center">
+
+                                <td>
+                                    <h6>@Html.DisplayFor(modelItem => item.orderID)</h6>
+                                </td>
+                                <td style="padding-top: 13px">
+                                    <h6>@Html.DisplayFor(modelItem => item.total)</h6>
+                                </td>
+                                <td style="padding-top: 13px">
+                                    <h6> @String.Format("{0:MM/dd/yyyy}", @item.dateBuy)</h6>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details","Order", new { id=item.orderID })">
+                                        <button class="btn btn-success">Detail</button>
+                                    </a>
+                                    
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

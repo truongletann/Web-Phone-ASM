@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Model.EF.tblCategory>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="main-body">
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb-title">
+                        <li class="breadcrumb-item">
+                            <a href="">
+                                <i class="feather icon-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Index", "CategoryAdmin")">
+                                Category
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-12">
+            <div class="card px-3">
+                <div class="card-header px-0 pb-2">
+                    <h2 class="text-uppercase text-center">LIST CATEGORY</h2>
+                    <a href="@Url.Action("Create", "CategoryAdmin")" class="btn btn-sm btn-primary">Add new</a>
+                </div>
+                <div class="card-block table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>@Html.DisplayNameFor(model => model.name)</th>
+                                    <th>Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int i = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <th>@(i++)</th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.name)
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Edit", "CategoryAdmin",new { id = item.categoryID })" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Edit</a>
+                                            @*<a href="@Url.Action("Delete", "CategoryAdmin",new { id = item.categoryID })" class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Delete</a>*@
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

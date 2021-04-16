@@ -1,0 +1,63 @@
+﻿@model Model.EF.tblCategory
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="main-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 mb-2">
+                    <div class="page-header-breadcrumb">
+                        <ul class="breadcrumb-title">
+                            <li class="breadcrumb-item">
+                                <a href="">
+                                    <i class="feather icon-home"></i> Home
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="">Category</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="">Edit</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @Html.AntiForgeryToken()
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-uppercase text-center">Edit category</h2>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-md-6 m-auto">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.categoryID)
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })                                
+                                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group mt-3">
+                                        <button type="submit" class="btn btn-primary m-b-0"> Edit </button>
+                                        <a href="@Url.Action("Index", "CategoryAdmin")" class="btn btn-secondary text-white">Back to list</a>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   
+}
+

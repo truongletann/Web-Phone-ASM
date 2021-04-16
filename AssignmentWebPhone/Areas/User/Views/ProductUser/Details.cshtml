@@ -1,0 +1,17 @@
+﻿@model Model.EF.tblProduct
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/User/Views/Shared/_LayoutUser.cshtml";
+}
+<h2>Product Detail</h2>
+
+<div class="product-detail">
+    <div class="product-image">
+        <img src='@Url.Content(Model.imagePath)' />
+    </div>
+    <div class="product-detail-content">
+        <p>Product Name: @Model.name</p>
+        <p>Product Price: $@(String.Format("{0:N0}", Model.price))</p>
+        <p>@Html.ActionLink("Add to Cart", "OrderNow", "ShoppingCart", new { id = Model.phoneID }, null)</p>
+    </div>
+</div>

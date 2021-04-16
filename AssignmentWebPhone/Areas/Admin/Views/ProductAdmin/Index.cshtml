@@ -1,0 +1,114 @@
+﻿@model PagedList.IPagedList<Model.EF.tblProduct>
+@using PagedList.Mvc;
+@*@model IEnumerable<Model.EF.tblProduct>*@
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm("Index", "ProductAdmin", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+    <p>
+    <p>
+        Product name: @Html.TextBox("SearchString") 
+        <input type="submit" value="Search" />
+        
+    </p>
+
+    </p>
+}
+
+<div class="main-body">
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb-title">
+                        <li class="breadcrumb-item">
+                            <a href="">
+                                <i class="feather icon-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="">
+                                Product
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-12">
+            <div class="card px-3">
+                <div class="card-header px-0 pb-2">
+                    <h2 class="text-uppercase text-center">LIST PRODUCT</h2>
+                    <a href="@Url.Action("Create", "ProductAdmin")" class="btn btn-sm btn-primary">Add new</a>
+                </div>
+                <div class="card-block table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>
+                                        STT
+                                    </th>
+                                    <th>
+                                        ProductName
+                                    </th>
+                                    <th>
+                                        Price
+                                    </th>
+                                    <th>
+                                        Category
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int i = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <th>@(i++)</th>
+                                        <td>
+                                            @item.name
+                                        </td>
+                                        <td>
+                                            @item.price
+                                        </td>
+                                        <td>
+                                            @item.tblCategory.name
+                                        </td>
+                                        <td>
+                                            @item.status
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Edit", "ProductAdmin",new { id = item.phoneID })" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Edit</a>
+                                            <a href="@Url.Action("Details", "ProductAdmin",new { id = item.phoneID })" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Detail</a>
+                                            <a href="@Url.Action("Delete", "ProductAdmin",new { id = item.phoneID })" class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Delete</a>
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        @Html.PagedListPager(Model,
+         page => Url.Action("Index", new { page = page, SearchString = ViewBag.SearchString })
+        )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+﻿@using Model.EF
+@using AssignmentWebPhone.Areas.User.Data;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/User/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="col-sm-12 col-md-12 col-md-offset-1">
+    <a class="continue_shopping" href="@Url.Action("Index", "ProductUser")">
+        <i id="cart_back" class="bx
+            bx-left-arrow-alt icon-single"></i> <span class="text_continous">Continue shopping</span>
+    </a>
+      @ViewBag.outOfProduct
+    @{
+        var Listcart = (List<Item>)Session["CART"];
+
+        if (Listcart != null&& Listcart.Count>0)
+        {
+            using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+            {
+                <table class="table table-hover">
+                    <thead>
+
+                        <tr>
+                            <th>Product</th>
+                            <th></th>
+                            <th></th>
+                            <th style="text-align: center;">Quantity</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Total</th>
+                            <th> </th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+
+
+
+                    <tbody>
+                        @foreach (var cart in (List<Item>)Session["CART"])
+                {
+                            <tr>
+                                <td class="col-sm-8 col-md-5">
+                                    <div class="media">
+                                        <a class="thumbnail pull-left" href="#" style="margin-top: 10px;">
+                                            <img class="media-object"
+                                                 src="@cart.Product.imagePath"
+                                                 style="width: 72px; height: 72px;">
+                                        </a>
+                                        <div class="media-body" style="margin-left: 10px;margin-bottom: 15px;">
+                                            <h4 class="media-heading">@Html.ActionLink(cart.Product.name, "Details", "ProductUser", new { id = cart.Product.phoneID }, new { @class = "delete-shopping" })</h4>
+                                            <h5 class="media-heading"> <a href="#">sale 0% </a></h5>
+                                            <span>Status: </span><span class="text-success"><strong>No Voucher</strong></span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td></td>
+                                <td style="text-align: center; padding: 0">
+                                </td>
+                                <td style="padding-left: 10px;padding-top: 0 ">
+                                    <input required="" style="width: 60px; margin-left: 25px;margin-top: 5px;" type="number"
+                                           min="1" class="form-control" name="quantity" value="@cart.Quantity">
+                                </td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>$@(String.Format("{0:N0}", cart.Product.price))</strong></td>
+
+                                <td class="col-sm-1 col-md-1 text-center">
+                                    <strong>$@(String.Format("{0:N0}", cart.Product.price * cart.Quantity))</strong>
+                                </td>
+
+
+                                <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
+                                <td class="col-sm-1 col-md-1">
+                                    <button type="button" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span>  @Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = cart.Product.phoneID },
+new { onclick = "return confirm ('Are you sure you want to delete this?');", @class = "delete-shopping" })
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>
+                                @{ List<Item> temp = (List<Item>)Session["CART"];
+            var total = String.Format("{0:N0}", temp.Sum(x => x.Quantity * x.Product.price)); }
+                                <h3>Total</h3>
+                            </td>
+                            <td class="text-right">
+                                <h3><strong> $@total</strong></h3>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>  <input type="submit" value="Update Cart" class="update-shopping" /></td>
+
+                        </tr>
+                        <tr>
+                        </tr>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>
+                            </td>
+                            <td>
+
+                                <a class="continue_shopping" href="@Url.Action( "CheckOut", "ShoppingCart",new {paymentMethod="Cash"})">
+                                    <button style="width: 130px;height:  40px;padding-left: 20px;" type="button"
+                                            class="btn btn-success">
+                                        <span class="glyphicon glyphicon-play">
+                                            Checkout
+                                        </span>
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="continue_shopping" href="@Url.Action( "CheckOut", "ShoppingCart",new {paymentMethod="PayPal"})">
+
+                                    <img width="200px" height="40px" src="~/assets/user/img/PayPal-PayNow-Button.png" />
+                                </a>
+                            </td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            }
+        }
+        else
+        {
+            <div style="text-align:center">
+
+
+                <h4> No items in your cart!!!</h4>
+            </div>
+
+
+        }
+
+
+    }
+</div>
+
+
+
+
+

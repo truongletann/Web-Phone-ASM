@@ -1,0 +1,68 @@
+header{
+    height: 65px;
+    width: 100%;
+    background-color: #D80018;
+}
+.header_items{
+    padding-top: 16px;
+    width: 99%;
+    height: 100%;
+    margin: 0 auto;
+    color: white;
+}
+#cart{
+    font-size: 30px;color: white;margin-top: -5px;
+}
+
+#carousel{
+    width: 100%;
+    height: 350px;
+    background-color: whitesmoke;
+    margin-top: 2px;
+}
+.image-deal{
+    width: 100%;
+    height: 30.5%;
+    background-color: violet;
+    margin-top: 8px;
+}
+#product{
+    width: 100%;
+    height: 1030px;
+    background-color: whitesmoke;
+    margin-top: 5px;
+}
+.srow_pro{
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+}
+.chiNhanh{
+    width: 100%;
+    height: 300px;
+    margin-top: 150px;
+}
+.chiNhanh img {
+    width: 100%;
+    height: 75%;
+}
+.continue_shopping{
+    color: red;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+#cart_back{
+    font-size: 20px;
+    color: red;
+  
+    
+    
+}
+.text_continous{
+   font-size: 25px;
+}
+.welcome_user{
+    font-size: 10px;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
